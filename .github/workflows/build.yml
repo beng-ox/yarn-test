@@ -1,14 +1,8 @@
-// .github/workflows/build.yml
-name: Build and Test
+ //.github/workflows/build.yml
+ name: Build and Test
 
  on:
-  workflow_dispatch:
-   # push:
-   #   branches:
-   #     - main
-   # pull_request:
-   #   branches:
-   #     - main
+   workflow_dispatch:
 
  jobs:
    build:
