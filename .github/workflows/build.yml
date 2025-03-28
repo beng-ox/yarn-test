@@ -1,29 +1,30 @@
+// .github/workflows/build.yml
 name: Build and Test
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+ on:
+   push:
+     branches:
+       - main
+   pull_request:
+     branches:
+       - main
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+ jobs:
+   build:
+     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+     steps:
+       - name: Checkout repository
+         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-          cache: 'yarn'
+       - name: Set up Node.js
+         uses: actions/setup-node@v3
+         with:
+           node-version: 14
+           cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn install
+       - name: Install dependencies
+         run: yarn install --frozen-lockfile
 
-      - name: Run application (test run)
-        run: yarn start & sleep 10
+       - name: Run application (test run)
+         run: yarn start & sleep 10
