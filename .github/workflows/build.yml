@@ -1,12 +1,7 @@
-name: Build and Test
+name: Install Yarn and Generate Lock File
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch: # Allows manual trigger from the GitHub UI
 
 jobs:
   build:
@@ -20,10 +15,30 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: 'yarn'
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies and generate yarn.lock
+        run: |
+          if [ ! -f yarn.lock ]; then
+            echo "yarn.lock not found, generating it..."
+            yarn install
+          else
+            echo "yarn.lock already exists."
+          fi
+
+      - name: Commit and push yarn.lock (if generated)
+        run: |
+          if [ ! -f yarn.lock ]; then
+            echo "No changes made to yarn.lock, skipping commit."
+          else
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git add yarn.lock
+            git commit -m "Generate yarn.lock"
+            git push origin main
+          fi
 
       - name: Run application (test run)
         run: yarn start & sleep 10
