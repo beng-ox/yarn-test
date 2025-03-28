@@ -1,3 +1,5 @@
+// vulnerable-yarn-app/index.js
+
 const express = require('express'); // Web framework
 const lodash = require('lodash'); // Utility library
 const marked = require('marked'); // Markdown parser (contains vulnerabilities in older versions)
