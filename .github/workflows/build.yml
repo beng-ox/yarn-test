@@ -22,6 +22,8 @@ jobs:
         env:
           GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Install dependencies and generate yarn.lock
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
         run: |
           if [ ! -f yarn.lock ]; then
             echo "yarn.lock not found, generating it..."
@@ -29,8 +31,7 @@ jobs:
           else
             echo "yarn.lock already exists."
           fi
-        env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
+        
       - name: Commit and push yarn.lock (if generated)
         run: |
           if [ ! -f yarn.lock ]; then
