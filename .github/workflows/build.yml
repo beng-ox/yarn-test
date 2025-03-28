@@ -38,5 +38,6 @@ jobs:
             git add yarn.lock
             git commit -m "Generate yarn.lock"
             git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+          fi
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
