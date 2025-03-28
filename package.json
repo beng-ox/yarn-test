@@ -1,0 +1,14 @@
+{
+  "name": "vulnerable-yarn-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.17.1", // Old version
+    "lodash": "4.17.20", // Older version with prototype pollution
+    "marked": "0.3.6", // Known XSS vulnerability
+    "cors": "2.8.5"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
