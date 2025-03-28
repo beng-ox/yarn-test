@@ -16,11 +16,11 @@ jobs:
         with:
           node-version: 14
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Install Yarn
         run: npm install -g yarn
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Install dependencies and generate yarn.lock
         run: |
           if [ ! -f yarn.lock ]; then
@@ -30,7 +30,7 @@ jobs:
             echo "yarn.lock already exists."
           fi
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Commit and push yarn.lock (if generated)
         run: |
           if [ ! -f yarn.lock ]; then
@@ -40,8 +40,8 @@ jobs:
             git config --global user.email "actions@github.com"
             git add yarn.lock
             git commit -m "Generate yarn.lock"
-            git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+            git push https://github-actions:${{secrets.GH_TOKEN}}@github.com/${{ github.repository }}.git HEAD:main
                     env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
           fi
 
